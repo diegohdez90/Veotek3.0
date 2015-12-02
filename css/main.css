@@ -1,0 +1,39 @@
+body{
+	background-color: rgb(0,172,200);
+}
+
+.header, .menu, .register, .horario{
+	background-color: white;
+	margin: 20px 0px;
+	padding: 20px;
+	
+}
+
+.header img{
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.header{
+	margin-top: 20px;
+}
+
+.menu a{
+	text-decoration: none;
+}
+
+.menu ul li{
+	display: inline;
+	margin: 20px;
+}
+
+.error{
+	background-color: white;
+	color: rgb(0,172,200);
+}
+
+.error img{
+	width: 50%;
+	display:block;
+    margin:auto;
+}
