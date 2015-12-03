@@ -63,10 +63,8 @@
 						echo "<td>".$salida."</td>";
 						echo "</tr>";
 					}
-					$ayer = date("Y-m-d",strtotime("-1 days"));
-					$entradaAyer = date("Y-m-d 17:30:00",strtotime("-1 days"));
-					$salida = date("Y-m-d 20:30:00",strtotime("-1 days"));
-					$datos = "update horario set salida='$salida' where entrada >= '$ayer'and entrada <= '$entradaAyer' and salida IS NULL";					
+					$salida = date("Y-m-d 21:30:00",strtotime("-1 days"));
+					$datos = "UPDATE horario SET salida='$salida' where salida IS NULL";					
 					$actualizar = mysql_query($datos, $conexion) or die(mysql_error());
 				?>
 			</table>
