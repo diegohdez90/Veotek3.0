@@ -20,7 +20,8 @@
 		return false;
 	}
 	include('conexion.php');
-	$dia = date("Y-m-d H:i:sa");
+	$dia = date("Y-m-d");
+	$hora = date("H:i:sa");
 	$clave = $_POST['clave'];
 
 
@@ -28,7 +29,7 @@
 			$resAcceder = mysql_query($acceder, $conexion) or die(mysql_error());
 			$total = mysql_num_rows($resAcceder);
 			if($total==1){
-				$sql = "select * from horario where personal_idpersonal = '$clave' and salida IS NULL";
+				$sql = "select * from horario where personal_idpersonal = '$clave' and hora_salida IS NULL";
 				/*$sql = "insert into horario(entrada,usuario_idusuario) values('$dia','$id_system')";*/
 				$if_exist_entrada = mysql_query($sql, $conexion) or die(mysql_error());
 				$total = mysql_num_rows($if_exist_entrada);
@@ -41,8 +42,8 @@
 									<h2 class='text-center'>Registrando salida</h2>
 								</div>
 							</div>";
-						$entrada = $rowEmp['entrada'];
-						$sql = "UPDATE horario SET salida='$dia' WHERE personal_idpersonal='$clave' and entrada = '$entrada'";
+						$hora_entrada = $rowEmp['hora_entrada'];
+						$sql = "UPDATE horario SET dia_salida='$dia',hora_salida='$hora' WHERE personal_idpersonal='$clave' and hora_entrada = '$hora_entrada'";
 						$resultado = mysql_query($sql, $conexion) or die(mysql_error());
 					}
 					
@@ -55,7 +56,7 @@
 									<h2 class='text-center'>Registrando entrada</h2>
 								</div>
 							</div>";
-					$sql = "insert into horario(entrada,personal_idpersonal) values('$dia','$clave')";
+					$sql = "insert into horario(dia_entrada,hora_entrada,personal_idpersonal) values('$dia','$hora','$clave')";
 					$resultado = mysql_query($sql, $conexion) or die(mysql_error());
 
 				}

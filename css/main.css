@@ -4,8 +4,7 @@ body{
 
 .header, .menu, .register, .horario{
 	background-color: white;
-	margin: 20px 0px;
-	padding: 20px;
+	padding: 15px;
 	
 }
 
@@ -36,4 +35,16 @@ body{
 	width: 50%;
 	display:block;
     margin:auto;
+}
+
+.numero { font-size: 30px; }
+
+.salida td{
+	background-color: #FF0606;
+	color: white;
+}
+
+.entrada td{
+	background-color: #137D29;
+	color: white;
 }
