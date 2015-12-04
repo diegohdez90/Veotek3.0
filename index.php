@@ -17,7 +17,7 @@
 				<div class=" header row">
 					<h3 class="text-center">Bienvenidos a Veotek<br>
 					<?php
-						$hoy = date("Y-m-d");
+						$hoy = date("Y-m-j");
 						$annio = substr($hoy, 0,4);
 						$mes = substr($hoy, 5,2);
 						$dia = substr($hoy, 8,2);
@@ -62,12 +62,14 @@
 							<th>Nombre</th>
 							<th>Hora de entrada</th>
 							<th>Hora de salida</th>
+							<th>Tiempo</th>
 						</tr>
 						<?php
 							$dateTime = new dateTime("tomorrow");
+							$hoy = date("Y-m-d");
 							$tomorrow = $dateTime->format("Y-m-d");
 							include('conexion.php');
-							$datos = "select idpersonal,nombre,apellidos,dia_entrada,hora_entrada,dia_salida,hora_salida from horario,personal where dia_entrada = '$hoy' and personal.idpersonal = horario.personal_idpersonal and hora_salida is not null order by hora_salida desc";
+							$datos = "select idpersonal,nombre,apellidos,dia_entrada,hora_entrada,dia_salida,hora_salida,tiempo from horario,personal where dia_entrada = '$hoy' and personal.idpersonal = horario.personal_idpersonal and hora_salida is not null order by hora_salida desc";
 							$horario = mysql_query($datos, $conexion) or die(mysql_error());
 							$totEmp = mysql_num_rows($horario);
 							while ($rows = mysql_fetch_assoc($horario)) {
@@ -78,6 +80,8 @@
 								echo "<td>".$hora_entrada."</td>";
 								$hora_salida = $rows['hora_salida'];
 								echo "<td>".$hora_salida."</td>";
+								$tiempo = $rows['tiempo'];
+								echo "<td>".$tiempo."</td>";
 								echo "</tr>";
 							}
 
@@ -99,7 +103,13 @@
 								echo "</tr>";
 							}
 							$dia_salida = date("Y-m-d",strtotime("-1 days"));
-							$datos = "UPDATE horario SET dia_salida='$dia_salida',hora_salida='19:30:00' where dia_entrada='$dia_salida' and hora_salida IS NULL";					
+							if(date("w")==6){
+								$hora_salida="17:00:00";
+							}
+							else{
+								$hora_salida="19:30:00";
+							}
+							$datos = "UPDATE horario SET dia_salida='$dia_salida',hora_salida='$hora_salida' where dia_entrada='$dia_salida' and hora_salida IS NULL";					
 							$actualizar = mysql_query($datos, $conexion) or die(mysql_error());
 						?>
 					</table>

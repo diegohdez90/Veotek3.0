@@ -32,7 +32,7 @@ include ('funciones.php');
 				<li><a href="reportes.php">Reportes</a></li>
 			</ul>
 		</div>
-		<div class=" row actividades">
+		<div class="actividades row ">
 				<h2>Bitacora</h2>
 
 				<label><b>Personal<b></label><br>

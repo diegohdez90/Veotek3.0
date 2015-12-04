@@ -22,6 +22,7 @@ if(empty($_GET['month'])){
 $number_month = $_GET['month'];
 $first_day = $number_month."-01";
 $last_day = date("Y-m-t", strtotime($first_day));
+$annio = substr($number_month, 0,4);
 $mes = substr($number_month, 5,7);
 $meses = array('1' =>  'Enero', 
 			'2' =>  'Febrero',
@@ -40,32 +41,35 @@ $nombre_mes = $meses[$mes];
 <div class="container">
 		<div class="row horario">
 			<div class="table-responsive">
-				<h3>Reporte de entradas y salidas de <?php echo $nombre_mes;?></h3>
+				<h3>Reporte de entradas y salidas de <?php echo $nombre_mes;?> de <?php echo $annio;?> </h3>
 				<table class="table">
 					<tr>
 						<th>ID Personal</th>
 						<th>Nombre</th>
-						<th>Apellidos</th>
+						<th>D&iacute;a</th>
 						<th>Hora de entrada</th>
 						<th>Hora de salida</th>
+						<th>Tiempo</th>
 					</tr>
 					<?php
 						include('conexion.php');
-						$datos = "select idpersonal,nombre,apellidos,entrada,salida from horario,personal where personal.idpersonal = horario.personal_idpersonal and entrada >= '$first_day' and entrada <= '$last_day' order by entrada";
+						$datos = "select idpersonal,nombre,apellidos,dia_entrada,hora_entrada,hora_salida from horario,personal where personal.idpersonal = horario.personal_idpersonal and dia_entrada >= '$first_day' and dia_entrada <= '$last_day' order by dia_entrada,hora_entrada asc";
 						$horario = mysql_query($datos, $conexion) or die(mysql_error());
 						$totEmp = mysql_num_rows($horario);
 						while ($rows = mysql_fetch_assoc($horario)) {
 							echo "<tr>";
 							$idpersonal = $rows['idpersonal'];
 							echo "<td>".$idpersonal."</td>";
-							$nombre = $rows['nombre'];
+							$nombre = $rows['nombre']. " " .$apellido = $rows['apellidos'];
 							echo "<td>".$nombre."</td>";
-							$apellido = $rows['apellidos'];
-							echo "<td>".$apellido."</td>";
-							$entrada = $rows['entrada'];
+							$dia = $rows['dia_entrada'];
+							echo "<td>".$dia."</td>";
+							$entrada = $rows['hora_entrada'];
 							echo "<td>".$entrada."</td>";
-							$salida = $rows['salida'];
+							$salida = $rows['hora_salida'];
 							echo "<td>".$salida."</td>";
+							$tiempo = $rows['hora_salida'];
+							echo "<td>".$tiempo."</td>";
 							echo "</tr>";
 						}
 						

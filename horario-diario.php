@@ -22,7 +22,7 @@ if(empty($_GET['date'])){
 	</div>";
 	return false;
 }
-$fecha =  $_GET['date']." 00:00:00";
+$fecha =  $_GET['date'];
 $annio = substr($fecha, 0,4);
 $mes = substr($fecha, 5,2);
 $dia = substr($fecha, 8,2);
@@ -48,27 +48,30 @@ $nombre_mes = $meses[$mes];
 					<tr>
 						<th>ID Personal</th>
 						<th>Nombre</th>
-						<th>Apellidos</th>
+						<th>D&iacute;a</th>
 						<th>Hora de entrada</th>
 						<th>Hora de salida</th>
+						<th>Tiempo</th>
 					</tr>
 					<?php
 						include('conexion.php');
-						$datos = "select idpersonal,nombre,apellidos,entrada,salida from horario,personal where personal.idpersonal = horario.personal_idpersonal and entrada >= '$fecha' and entrada <= '$tday' order by entrada";
+						$datos = "select idpersonal,nombre,apellidos,dia_entrada,hora_entrada,hora_salida,tiempo from horario,personal where personal.idpersonal = horario.personal_idpersonal and dia_entrada >= '$fecha' order by hora_entrada";
 						$horario = mysql_query($datos, $conexion) or die(mysql_error());
 						$totEmp = mysql_num_rows($horario);
 						while ($rows = mysql_fetch_assoc($horario)) {
 							echo "<tr>";
 							$idpersonal = $rows['idpersonal'];
 							echo "<td>".$idpersonal."</td>";
-							$nombre = $rows['nombre'];
+							$nombre = $rows['nombre']. " " .$apellido = $rows['apellidos'];
 							echo "<td>".$nombre."</td>";
-							$apellido = $rows['apellidos'];
-							echo "<td>".$apellido."</td>";
-							$entrada = $rows['entrada'];
+							$dia = $rows['dia_entrada'];
+							echo "<td>".$dia."</td>";
+							$entrada = $rows['hora_entrada'];
 							echo "<td>".$entrada."</td>";
-							$salida = $rows['salida'];
+							$salida = $rows['hora_salida'];
 							echo "<td>".$salida."</td>";
+							$tiempo = $rows['tiempo'];
+							echo "<td>".$tiempo."</td>";
 							echo "</tr>";
 						}
 						

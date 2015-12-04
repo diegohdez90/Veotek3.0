@@ -3,7 +3,7 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <link rel="icon" href="img/eo.ico" type="image/gif" sizes="16x16">
-<META HTTP-EQUIV="REFRESH" CONTENT="1;URL=index.php">
+<META HTTP-EQUIV="REFRESH" CONTENT="15;URL=index.php">
 </head>
 <body>
 
@@ -42,8 +42,19 @@
 									<h2 class='text-center'>Registrando salida</h2>
 								</div>
 							</div>";
-						$hora_entrada = $rowEmp['hora_entrada'];
-						$sql = "UPDATE horario SET dia_salida='$dia',hora_salida='$hora' WHERE personal_idpersonal='$clave' and hora_entrada = '$hora_entrada'";
+						$hora_entrada =  $rowEmp['hora_entrada'];	
+						$hora_salida = substr($hora, 0,8);
+
+						$total      = strtotime($hora_salida) - strtotime($hora_entrada);
+						$hours      = floor($total / 60 / 60);
+						$minutes    = round(($total - ($hours * 60 * 60)) / 60);
+
+						$tiempo = $hours.':'.$minutes;
+
+						$hm = explode(":", $tiempo);
+						$res = ($hm[0] + ($hm[1]/60));
+						
+						$sql = "UPDATE horario SET dia_salida='$dia',hora_salida='$hora',tiempo='$tiempo',tiempo_decimal='$res' WHERE personal_idpersonal='$clave' and hora_entrada = '$hora_entrada'";
 						$resultado = mysql_query($sql, $conexion) or die(mysql_error());
 					}
 					
