@@ -2,6 +2,7 @@
 <head>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/main.css">
+<link rel="stylesheet" type="text/css" href="css/imprimir.css">
 <link rel="icon" href="img/eo.ico" type="image/gif" sizes="16x16">
 </head>
 
@@ -77,6 +78,7 @@ $nombre_mes = $meses[$mes];
 				</table>
 			</div>
 		</div>
+		<button onclick='window.print()' type='button' id='btnImprimir'></button>
 	</div>
 
 </body>

@@ -102,15 +102,60 @@
 								$hora_salida = $rows['hora_salida'];
 								echo "</tr>";
 							}
-							$dia_salida = date("Y-m-d",strtotime("-1 days"));
-							if(date("w")==6){
-								$hora_salida="17:00:00";
+/*							if(date("w")=="1"){
+
+								$sabado = date("Y-m-d",strtotime("-2 days"));
+							
+								$sql = "select * from horario where dia_entrada='$sabado'and hora_salida IS NULL";
+								$if_exist_entrada = mysql_query($sql, $conexion) or die(mysql_error());
+								$total = mysql_num_rows($if_exist_entrada);
+								while ($rowEmp = mysql_fetch_assoc($if_exist_entrada)) {
+									$hora_entrada =  $rowEmp['hora_entrada'];	
+							
+
+									$hora_salida="17:30:00";
+
+									$total      = strtotime($hora_salida) - strtotime($hora_entrada);
+									$hours      = floor($total / 60 / 60);
+									$minutes    = round(($total - ($hours * 60 * 60)) / 60);
+
+									$tiempo = $hours.':'.$minutes;
+
+									$hm = explode(":", $tiempo);
+									$res = ($hm[0] + ($hm[1]/60));
+
+
+									$datos = "UPDATE horario SET dia_salida='$sabado',hora_salida='$hora_salida',tiempo='$tiempo',tiempo_decimal='$res' where dia_entrada='$sabado' and hora_salida IS NULL";					
+									$actualizar = mysql_query($datos, $conexion) or die(mysql_error());
+								}
 							}
 							else{
-								$hora_salida="19:30:00";
+								$ayer = date("Y-m-d",strtotime("-1 days"));
+								
+								$sql = "select * from horario where dia_entrada='$ayer' and hora_salida IS NULL";
+								$if_exist_entrada = mysql_query($sql, $conexion) or die("Al encontrar ".mysql_error());
+								$total = mysql_num_rows($if_exist_entrada);
+								while ($rowEmp = mysql_fetch_assoc($if_exist_entrada)) {
+									$hora_entrada =  $rowEmp['hora_entrada'];	
+
+									$hora_salida="19:40:00";
+
+									$total      = strtotime($hora_salida) - strtotime($hora_entrada);
+									$hours      = floor($total / 60 / 60);
+									$minutes    = round(($total - ($hours * 60 * 60)) / 60);
+
+									$tiempo = $hours.':'.$minutes;
+
+									$hm = explode(":", $tiempo);
+									$res = ($hm[0] + ($hm[1]/60));
+
+
+									$datos = "UPDATE horario SET dia_salida='$ayer',hora_salida='$hora_salida',tiempo='$tiempo',tiempo_decimal='$res' where dia_entrada='$ayer' and hora_salida IS NULL";					
+									$actualizar = mysql_query($datos, $conexion) or die("Al actualizar ".mysql_error());
+								}
+
 							}
-							$datos = "UPDATE horario SET dia_salida='$dia_salida',hora_salida='$hora_salida' where dia_entrada='$dia_salida' and hora_salida IS NULL";					
-							$actualizar = mysql_query($datos, $conexion) or die(mysql_error());
+							*/
 						?>
 					</table>
 				</div>

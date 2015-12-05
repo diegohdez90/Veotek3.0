@@ -1,6 +1,7 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/imprimir.css">
 <link rel="icon" href="img/eo.ico" type="image/gif" sizes="16x16">
 </head>
 
@@ -57,6 +58,7 @@ $usuario = $_GET['usuario'];
 				<h2>Tiempo Total <?php echo $total; ?></h2>
 			</div>
 		</div>
+		<button onclick='window.print()' type='button' id='btnImprimir'></button>
 	</div>
 
 </body>
