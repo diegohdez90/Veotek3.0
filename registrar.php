@@ -142,9 +142,11 @@
 								$minutes    = round(($total - ($hours * 60 * 60)) / 60);
 
 								$tiempo = $hours.":".$minutes.':00';
-								$suma  = $tol +strtotime($tiempo);
-								$sumtime = date("H:i:s",$suma);
-					
+								$mi_tolerancia = strtotime($tol) -strtotime("00:00:00");
+								$tolerancia_hoy = strtotime($tiempo)- strtoupper("00:00:00");
+
+								$sumtime = date("H:i:s",$mi_tolerancia+$tolerancia_hoy);
+								echo $sumtime;
 								$sumar = "update personal set tolerancia='$sumtime' where idpersonal='$clave'";
 								$resultado = mysql_query($sumar, $conexion) or die(mysql_error());
 							}
