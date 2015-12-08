@@ -50,10 +50,11 @@ echo "
 						<th>ID</th>
 						<th>Nombre</th>
 						<th>Usuario</th>
+						<th>Tolerancia</th>
 						<th>Acci&oacute;n</th>
 					</tr>";
 
-					$datos = "select foto as Foto,idpersonal as ID, concat(personal.nombre,' ',apellidos) as Nombre ,usuario.nombre as Usuario from personal,usuario where usuario_idusuario = idusuario";
+					$datos = "select foto as Foto,idpersonal as ID, concat(personal.nombre,' ',apellidos) as Nombre ,usuario.nombre as Usuario,tolerancia from personal,usuario where usuario_idusuario = idusuario";
 						$users = mysql_query($datos, $conexion) or die(mysql_error());
 						$totEmp = mysql_num_rows($users);
 						while ($rows = mysql_fetch_assoc($users)) {
@@ -66,6 +67,8 @@ echo "
 							echo "<td>".$nombre."</td>";
 							$usuario = $rows['Usuario'];
 							echo "<td>".$usuario."</td>";
+							$tolerancia = $rows['tolerancia'];
+							echo "<td>".$tolerancia."</td>";
 							echo "<td><a class='btn btn-default	' href='info.php?id=".$rows['ID']."'>Ver informaci&oacute;n</a>";
 							echo " ";
 							echo '<a class="btn btn-success" href="actualizar.php?id='.$rows['ID'].'">Update</a>';
