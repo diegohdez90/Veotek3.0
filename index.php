@@ -17,6 +17,7 @@
 				<div class=" header row">
 					<h3 class="text-center">Bienvenidos a Veotek<br>
 					<?php
+						include('tolerancia.php');
 						$hoy = date("Y-m-j");
 						$annio = substr($hoy, 0,4);
 						$mes = substr($hoy, 5,2);
